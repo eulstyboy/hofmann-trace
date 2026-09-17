@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="application-version" content="1.7.1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141414">
+<title>Hofmann Trace</title>
+<style>
+<!-- STYLES -->
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-lasso" viewBox="0 0 24 24"><path d="M4 10c0-3.3 3.6-5.5 8-5.5S20 6.7 20 10s-3.6 5.5-8 5.5c-1.3 0-2.6-.2-3.7-.6"/><path d="M8.3 14.9c-1.6.9-2.3 2.6-1.8 4.1"/><circle cx="6" cy="19.5" r="1.2"/></symbol>
+    <symbol id="i-lasso-plus" viewBox="0 0 24 24"><use href="#i-lasso"/><path d="M17.5 14v6M14.5 17h6"/></symbol>
+    <symbol id="i-lasso-minus" viewBox="0 0 24 24"><use href="#i-lasso"/><path d="M14.5 17h6"/></symbol>
+    <symbol id="i-poly" viewBox="0 0 24 24"><path d="M5 7l9-3 5 7-4 8-9-3z"/><rect x="3.5" y="5.5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="12.5" y="2.5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="17.5" y="9.5" width="3" height="3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-poly-plus" viewBox="0 0 24 24"><use href="#i-poly"/><path d="M17.5 14.5v6M14.5 17.5h6"/></symbol>
+    <symbol id="i-poly-minus" viewBox="0 0 24 24"><use href="#i-poly"/><path d="M14.5 17.5h6"/></symbol>
+    <symbol id="i-select" viewBox="0 0 24 24"><path d="M5 3l14 10-7 1-3 7z"/></symbol>
+    <symbol id="i-size" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="8.5" stroke-dasharray="2.5 2.5"/><path d="M12 12l6-6M18 6h-3.5M18 6v3.5"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 16l12-12 4 4-12 12-5 1zM13 7l4 4M4 16l4 4"/></symbol>
+    <symbol id="i-bucket" viewBox="0 0 24 24"><path d="M5 11l7-7 7 7-7 7z"/><path d="M12 4V2"/><path d="M19 14c1.2 1.6 2 3 2 4a2 2 0 0 1-4 0c0-1 .8-2.4 2-4z" fill="currentColor"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h9a6 6 0 0 1 6 6v0"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M15 14l5-5-5-5"/><path d="M20 9h-9a6 6 0 0 0-6 6v0"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 17v3h16v-3"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.6M8.2 13.2l7.6 4.6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8M4 12h2M10 12h10"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/><circle cx="8" cy="12" r="2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-sym" viewBox="0 0 24 24"><path d="M12 3v18" stroke-dasharray="2.4 2.4"/><path d="M9 7.5L3.5 12 9 16.5z"/><path d="M15 7.5l5.5 4.5-5.5 4.5z"/></symbol>
+    <symbol id="i-sym-none" viewBox="0 0 24 24"><path d="M12 3v18" stroke-dasharray="2.4 2.4" opacity=".35"/><path d="M9 7.5L3.5 12 9 16.5z" fill="currentColor"/></symbol>
+    <symbol id="i-sym-v" viewBox="0 0 24 24"><path d="M12 3v18" stroke-dasharray="2.4 2.4"/><path d="M9 7.5L3.5 12 9 16.5z" fill="currentColor"/><path d="M15 7.5l5.5 4.5-5.5 4.5z" fill="currentColor"/></symbol>
+    <symbol id="i-sym-h" viewBox="0 0 24 24"><path d="M3 12h18" stroke-dasharray="2.4 2.4"/><path d="M7.5 9L12 3.5 16.5 9z" fill="currentColor"/><path d="M7.5 15L12 20.5l4.5-5.5z" fill="currentColor"/></symbol>
+    <symbol id="i-sym-both" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" stroke-dasharray="2.4 2.4"/><circle cx="7" cy="7" r="2.4" fill="currentColor"/><circle cx="17" cy="7" r="2.4" fill="currentColor"/><circle cx="7" cy="17" r="2.4" fill="currentColor"/><circle cx="17" cy="17" r="2.4" fill="currentColor"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-pipette" viewBox="0 0 24 24"><path d="M14 5l5 5M15 4l2-2 5 5-2 2M16 7L5 18l-3 1 1-3L14 5M5 14l5 5"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <header class="bar">
+    <div class="brand">hofmann <span>trace</span></div>
+    <div class="group">
+      <button type="button" class="ibtn" id="undoBtn" data-tip="undo (ctrl+z)" aria-label="undo"><svg class="ico"><use href="#i-undo"/></svg></button>
+      <button type="button" class="ibtn" id="redoBtn" data-tip="redo (ctrl+shift+z)" aria-label="redo"><svg class="ico"><use href="#i-redo"/></svg></button>
+      <button type="button" class="ibtn" id="previewBtn" data-tip="hold for clean preview (h)" aria-label="hold for clean preview" aria-pressed="false"><svg class="ico"><use href="#i-eye"/></svg></button>
+    </div>
+    <div class="spacer"></div>
+    <div class="group" style="position:relative">
+      <button type="button" class="ibtn" id="exportBtn" data-tip="export" aria-label="export" aria-haspopup="true"><svg class="ico"><use href="#i-download"/></svg></button>
+      <div class="menu" id="exportMenu" role="menu">
+        <div class="mtitle">vector</div>
+        <button type="button" class="item" data-fmt="svg">SVG <small>exact paths</small></button>
+        <button type="button" class="item" data-fmt="merged">SVG · merged <small>one closed path</small></button>
+        <button type="button" class="item" data-fmt="eps">EPS <small>PostScript</small></button>
+        <div class="mtitle">image</div>
+        <button type="button" class="item" data-fmt="png" data-size="sd">PNG · SD <small>1080 px</small></button>
+        <button type="button" class="item" data-fmt="png" data-size="hd">PNG · HD <small>2160 px</small></button>
+        <button type="button" class="item" data-fmt="jpg" data-size="sd">JPEG · SD <small>1080 px</small></button>
+        <button type="button" class="item" data-fmt="jpg" data-size="hd">JPEG · HD <small>2160 px</small></button>
+        <label class="toggle"><input type="checkbox" id="exportBg" checked> include background</label>
+        <div class="mtitle">project</div>
+        <button type="button" class="item" data-fmt="json">Save project <small>.json</small></button>
+        <button type="button" class="item" id="openProject">Open project… <small>.json</small></button>
+        <input type="file" id="projectFile" accept=".json,application/json" style="display:none">
+      </div>
+      <button type="button" class="ibtn" id="shareBtn" data-tip="share the image" aria-label="share the image"><svg class="ico"><use href="#i-share"/></svg></button>
+      <button type="button" class="ibtn" id="aboutBtn" data-tip="about" aria-label="about"><svg class="ico"><use href="#i-info"/></svg></button>
+      <button type="button" class="ibtn mobile-only" id="settingsBtn" aria-controls="side" aria-expanded="false" data-tip="settings" aria-label="settings"><svg class="ico"><use href="#i-settings"/></svg></button>
+    </div>
+  </header>
+
+  <div class="work">
+    <nav class="rail" aria-label="tools">
+      <button type="button" class="ibtn" data-tool="select" aria-pressed="false" data-tip="select shapes, smooth tangents or move circles (v)" aria-label="select shapes and circles"><svg class="ico"><use href="#i-select"/></svg></button>
+      <button type="button" class="ibtn" data-tool="lassoAdd" aria-pressed="true" data-tip="lasso + : circle some dots (l)" aria-label="lasso plus"><svg class="ico"><use href="#i-lasso-plus"/></svg></button>
+      <button type="button" class="ibtn danger" data-tool="lassoSub" aria-pressed="false" data-tip="lasso − : remove circles (L)" aria-label="lasso minus"><svg class="ico"><use href="#i-lasso-minus"/></svg></button>
+      <button type="button" class="ibtn" data-tool="polyAdd" aria-pressed="false" data-tip="polygonal lasso + : point by point (p)" aria-label="polygon plus"><svg class="ico"><use href="#i-poly-plus"/></svg></button>
+      <button type="button" class="ibtn danger" data-tool="polySub" aria-pressed="false" data-tip="polygonal lasso − : point by point (P)" aria-label="polygon minus"><svg class="ico"><use href="#i-poly-minus"/></svg></button>
+      <div class="sep"></div>
+      <button type="button" class="ibtn" data-tool="fill" aria-pressed="false" data-tip="fill a circle (f)" aria-label="fill"><svg class="ico"><use id="fillIcon" href="#i-bucket"/></svg></button>
+      <div class="sep"></div>
+      <button type="button" class="ibtn dim" id="symBtn" data-tip="symmetry (m)" aria-label="symmetry" aria-haspopup="true"><svg class="ico"><use href="#i-sym"/></svg></button>
+      <button type="button" class="ibtn" id="clearBtn" data-tip="clear all" aria-label="clear all"><svg class="ico"><use href="#i-trash"/></svg></button>
+      <div class="symmenu" id="symMenu" role="menu" aria-label="symmetry mode">
+        <button type="button" class="ibtn" data-sym="none" data-tip="no symmetry" aria-label="no symmetry" aria-pressed="true"><svg class="ico"><use href="#i-sym-none"/></svg></button>
+        <button type="button" class="ibtn" data-sym="v" data-tip="left / right" aria-label="left / right" aria-pressed="false"><svg class="ico"><use href="#i-sym-v"/></svg></button>
+        <button type="button" class="ibtn" data-sym="h" data-tip="top / bottom" aria-label="top / bottom" aria-pressed="false"><svg class="ico"><use href="#i-sym-h"/></svg></button>
+        <button type="button" class="ibtn" data-sym="both" data-tip="both axes" aria-label="both axes" aria-pressed="false"><svg class="ico"><use href="#i-sym-both"/></svg></button>
+      </div>
+    </nav>
+
+    <main class="stage">
+      <div class="canvas-wrap" id="wrap">
+        <div id="recovery" class="recovery" hidden><span>Continue your last session?</span><button id="restoreSession">Restore</button><button id="discardSession">Start fresh</button></div>
+        <div class="view-tools"><button id="zoomOut" aria-label="zoom out">−</button><button id="zoomReset" aria-label="fit canvas">100 %</button><button id="zoomIn" aria-label="zoom in">+</button></div>
+        <span id="busyBadge" hidden>Updating shapes…</span>
+        <div class="frame" id="frame">
+          <svg id="canvas" xmlns="http://www.w3.org/2000/svg" aria-label="canvas"></svg>
+        </div>
+        <div class="popup" id="sizePop" role="dialog" aria-label="circle size">
+          <div class="prow"><span class="lbl">size</span>
+            <span class="num"><button type="button" id="szMinus" aria-label="minus"><svg class="ico" style="width:14px;height:14px"><use href="#i-minus"/></svg></button><input id="szInput" aria-label="size in percent" inputmode="numeric" type="number" min="0" max="150" step="1"><button type="button" id="szPlus" aria-label="plus"><svg class="ico" style="width:14px;height:14px"><use href="#i-plus"/></svg></button></span>
+            <span class="lbl">%</span>
+          </div>
+          <div class="prow"><input id="szRange" type="range" min="0" max="150" step="1" aria-label="size in percent">
+            <button type="button" class="ibtn no" id="szCancel" data-tip="cancel" aria-label="cancel"><svg class="ico"><use href="#i-close"/></svg></button>
+            <button type="button" class="ibtn ok" id="szOk" data-tip="apply" aria-label="apply"><svg class="ico"><use href="#i-check"/></svg></button>
+          </div>
+        </div>
+        <div class="floater" id="polyFloat">
+          <button type="button" class="ibtn no" id="polyCancel" data-tip="discard" aria-label="discard the polygon"><svg class="ico"><use href="#i-close"/></svg></button>
+          <button type="button" class="ibtn ok" id="polyClose" data-tip="close the shape (enter)" aria-label="close the polygon"><svg class="ico"><use href="#i-check"/></svg></button>
+        </div>
+        <div id="nodeTools" class="node-tools" hidden>
+          <div id="nodeActions"><span id="nodeCount">0 selected</span><button id="nodeAdd" aria-pressed="false" title="Add a circle, then click an empty space">Add</button><button id="nodeMerge">Merge</button><button id="nodePickSize" aria-pressed="false" aria-label="size pipette" title="Pick a circle size, then apply it to other circles"><svg class="ico"><use href="#i-pipette"/></svg></button><button id="nodeDelete" aria-label="delete selected circles" title="Remove these circles from the grid"><svg class="ico"><use href="#i-trash"/></svg></button></div>
+        </div>
+        <div class="floater" id="selFloat">
+          <button type="button" id="tangentAction" hidden>Smooth</button>
+          <button type="button" class="ibtn no" id="selDelete" data-tip="delete this shape (del)" aria-label="delete the shape"><svg class="ico"><use href="#i-trash"/></svg></button>
+        </div>
+      </div>
+      <div class="status" id="status" role="status"></div>
+    </main>
+
+    <aside class="side" id="side">
+      <section>
+        <h2>grid</h2>
+        <div class="row"><label for="colsIn">columns</label><span class="num"><button type="button" data-step="colsIn:-1" aria-label="minus"><svg class="ico" style="width:14px;height:14px"><use href="#i-minus"/></svg></button><input id="colsIn" type="number" min="2" max="30" value="7"><button type="button" data-step="colsIn:1" aria-label="plus"><svg class="ico" style="width:14px;height:14px"><use href="#i-plus"/></svg></button></span></div>
+        <div class="row"><label for="rowsIn">rows</label><span class="num"><button type="button" data-step="rowsIn:-1" aria-label="minus"><svg class="ico" style="width:14px;height:14px"><use href="#i-minus"/></svg></button><input id="rowsIn" type="number" min="2" max="30" value="7"><button type="button" data-step="rowsIn:1" aria-label="plus"><svg class="ico" style="width:14px;height:14px"><use href="#i-plus"/></svg></button></span></div>
+        <div class="row size-default"><label for="sizeIn">global size</label><input id="sizeIn" type="range" min="0" max="100" value="71"><output id="sizeValue" for="sizeIn">71 %</output></div>
+        <div class="row"><label for="bevelIn">corner rounding</label><input id="bevelIn" type="range" min="0" max="100" value="100"></div>
+        <div class="row"><label class="toggle"><input type="checkbox" id="offsetIn"> staggered rows</label></div>
+        <div class="row"><label>rotate canvas</label><span class="num"><button type="button" id="rotL" aria-label="rotate counter-clockwise" data-tip="rotate 90° counter-clockwise"><svg class="ico" style="width:14px;height:14px"><use href="#i-undo"/></svg></button><button type="button" id="rotR" aria-label="rotate clockwise" data-tip="rotate 90° clockwise"><svg class="ico" style="width:14px;height:14px"><use href="#i-redo"/></svg></button></span></div>
+        <div class="row"><label for="guideIn">circle opacity</label><input id="guideIn" type="range" min="0" max="100" value="60"></div>
+      </section>
+      <section>
+        <h2>colours</h2>
+        <div class="row"><label for="shapeColor">shape</label><span class="sw"><input type="color" id="shapeColor" value="#111111"><input class="hex" id="shapeHex" type="text" value="#111111" maxlength="7" spellcheck="false" autocomplete="off" aria-label="shape colour, hex"></span></div>
+        <div class="row"><label for="bgColor">background</label><span class="sw"><input type="color" id="bgColor" value="#ffffff"><input class="hex" id="bgHex" type="text" value="#ffffff" maxlength="7" spellcheck="false" autocomplete="off" aria-label="background colour, hex"></span></div>
+        <div class="row"><label for="filletIn">junction smoothing</label><input id="filletIn" type="range" min="0" max="60" value="30" title="Tight neck to soft transition; click a tangent to straighten it"></div>
+      </section>
+      <section>
+        <h2>reference image</h2>
+        <button type="button" id="referenceImport">Import image…</button><input type="file" id="referenceFile" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+        <div id="referenceControls" hidden>
+          <p class="hintbox">Reference only · not exported</p>
+          <label class="toggle"><input type="checkbox" id="refVisible" checked> show image</label>
+          <div class="row"><label for="refOpacity">opacity</label><input id="refOpacity" type="range" min="0" max="100" value="40"></div>
+          <div class="row"><label for="refScale">image size</label><input id="refScale" type="range" min="10" max="400" value="100"></div>
+          <div class="row"><label for="refX">horizontal</label><input id="refX" type="range" min="-100" max="100" value="0"></div>
+          <div class="row"><label for="refY">vertical</label><input id="refY" type="range" min="-100" max="100" value="0"></div>
+          <div class="ref-actions"><button type="button" id="refFit">Fit image</button><button type="button" id="refRemove">Remove</button></div>
+          <h2>from contrast</h2><p class="hintbox">A starting shape adapted to your grid. More rows and columns capture more detail.</p>
+          <div class="row"><label for="traceThreshold">contrast cutoff</label><input id="traceThreshold" type="range" min="0" max="255" value="128"></div>
+          <label class="toggle"><input type="checkbox" id="traceInvert"> use light areas</label>
+          <label class="row" for="traceStyle">result <select id="traceStyle"><option value="shape">Hofmann shapes</option><option value="pixels">Filled cells</option></select></label>
+          <div class="ref-actions"><button type="button" id="tracePreviewBtn">Preview shape</button><button type="button" id="traceCancel">Clear preview</button><button type="button" id="traceApply" disabled>Add to drawing</button></div>
+        </div>
+      </section><section>
+        <h2>session</h2><p id="saveState" aria-live="polite">Autosave ready</p><button id="installApp" hidden>Install app</button><button id="updateApp" hidden>Update app</button>
+      </section>
+      <section>
+        <h2>help</h2>
+        <div class="hintbox">
+          <b>select</b> <kbd>v</kbd>: click a shape, then a tangent for metaball<br>
+          drag a circle to move it; drag between circles to select several<br>
+          <b>Shift + click</b> or touch and hold adds to selection<br>
+          <b>Add</b> then click to place a circle; <b>Merge</b> joins the selection immediately<br>
+          <b>size pipette</b>: tap a source circle, then tap targets<br>
+          hold the <b>eye</b> button or <kbd>h</kbd> for a clean preview<br>
+          <b>double-click / double-tap</b> a circle to adjust its size<br>
+          <b>lasso + / −</b> circle the dots to add or remove<br>
+          <b>polygon</b> click by click, <kbd>enter</kbd> to close<br>
+          <b>tap a circle with the lasso</b> to set its size (0 = sharp corner)<br>
+          <b>click a tangent</b> to melt it into a neck<br>
+          <b>mirror icon</b> or <kbd>m</kbd> for symmetry<br>
+          <b>corner rounding</b> from squares to circles<br>
+          <b>two fingers</b> to zoom and move<br><b>mouse wheel</b> to zoom, <kbd>space</kbd> + drag to move
+        </div>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<dialog id="aboutDlg">
+  <div class="about">
+    <button type="button" class="ibtn close" id="aboutClose" aria-label="close"><svg class="ico"><use href="#i-close"/></svg></button>
+    <h3>Hofmann Trace</h3>
+    <p>A tool for drawing shapes on a grid of circles, in the manner of Armin Hofmann's exercises.</p>
+    <h4>where the grid comes from</h4>
+    <p>In his <em>Graphic Design Manual</em> (1965), the Basel designer Armin Hofmann presents a series of variations built on a grid of dots: shapes are born by joining circles with tangent lines, switching the direction of rotation each time. It is a system of remarkable economy — a circle, a straight line — that yields an endless family of silhouettes which all belong together. This tool takes that system and hands it to a rubber band: you circle a few dots, the band tightens and becomes an exact path of tangents and arcs.</p>
+    <h4>resources</h4>
+    <ul>
+      <li>Armin Hofmann, <em>Graphic Design Manual: Principles and Practice</em>, Niggli, 1965 — variations 51 to 53.</li>
+      <li><a href="https://bbtgnn.github.io/hofmann-1.0.0/" target="_blank" rel="noopener">Hofmann 1.0.0</a>, bbtgnn's open-source tool where tangents are picked one by one, which was the starting point.</li>
+      <li>Developed with Claude and Codex.</li>
+    </ul>
+    <h4>who</h4>
+    <p>I'm <a href="https://eulst.fr" target="_blank" rel="noopener">eulst</a>, a motion designer based in Paris. I built this tool to redraw my logo; it turned out to be far more fun than that, so I'm sharing it. <a class="ig" href="https://www.instagram.com/eulst" target="_blank" rel="noopener">@eulst</a> on Instagram.</p>
+  </div>
+</dialog>
+
+<dialog id="saveProjectDlg" aria-labelledby="saveProjectTitle"><form method="dialog" class="about" id="saveProjectForm"><h3 id="saveProjectTitle">Save project</h3><label for="projectName">Project name</label><input id="projectName" value="hofmann-trace-project" maxlength="100" autocomplete="off"><p id="saveProjectHint"></p><div class="share-actions"><button type="button" id="saveProjectCancel">Cancel</button><button type="submit" id="saveProjectConfirm">Choose location…</button></div></form></dialog>
+
+<dialog id="shareDlg" aria-labelledby="shareTitle">
+  <div class="about">
+    <button type="button" class="ibtn close" id="shareClose" aria-label="close"><svg class="ico"><use href="#i-close"/></svg></button>
+    <h3 id="shareTitle">Share your image</h3>
+    <p id="shareStatus" role="status">Preparing the JPEG…</p>
+    <img id="sharePreview" alt="Preview of the image to share" hidden style="max-width:100%;max-height:45vh;margin:12px auto">
+    <div class="share-actions">
+      <button type="button" id="shareReady" disabled>Share image</button>
+      <button type="button" id="shareDownload" disabled>Download JPEG</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+<!-- APP -->
+</script>
+
+</body>
+</html>
+
+

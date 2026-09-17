@@ -1,0 +1,14 @@
+{
+  "name": "hofmann-trace",
+  "version": "1.7.1",
+  "description": "A drawing tool based on Hofmann's grid principle.",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "node tests/regression.cjs && node tests/improvements.cjs && node tests/pixel-reference.cjs && node tests/node-editor.cjs && node tests/node-add.cjs && node tests/arrow-shapes.cjs && node tests/fluid-tools.cjs && node tests/metaball-range.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

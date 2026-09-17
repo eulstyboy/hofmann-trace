@@ -1,0 +1,12 @@
+node_modules/
+.vercel/
+.DS_Store
+Thumbs.db
+
+work/
+verification*/
+playwright-report/
+test-results/
+
+*.log
+*.tmp

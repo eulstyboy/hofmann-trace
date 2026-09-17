@@ -11,10 +11,13 @@ fs.writeFileSync(path.join(root,'hofmann-trace.html'),html);
 fs.writeFileSync(path.join(root,'index.html'),siteHtml);
 fs.mkdirSync(path.join(root,'site'),{recursive:true});
 fs.writeFileSync(path.join(root,'site/index.html'),siteHtml);
+fs.mkdirSync(path.join(root,'public'),{recursive:true});
+fs.writeFileSync(path.join(root,'public/index.html'),siteHtml);
 for(const f of ['manifest.webmanifest','sw.js','icon.svg','icon-192.png','icon-512.png']){
   if(fs.existsSync(path.join(root,'src',f))){
     fs.copyFileSync(path.join(root,'src',f),path.join(root,f));
     fs.copyFileSync(path.join(root,'src',f),path.join(root,'site',f));
+    fs.copyFileSync(path.join(root,'src',f),path.join(root,'public',f));
   }
 }
 console.log('Built standalone HTML and installable site.');

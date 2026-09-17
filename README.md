@@ -25,7 +25,7 @@ Recommended Vercel settings:
 - Output Directory: empty
 - Install Command: empty
 
-The root `index.html` is the production app. `vercel.json` adds cache headers so `index.html` and `sw.js` refresh correctly after updates.
+`vercel.json` runs the build and deploys the generated `public/` directory. It also adds cache headers so `index.html` and `sw.js` refresh correctly after updates.
 
 ## Local Use
 
